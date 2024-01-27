@@ -1,0 +1,19 @@
+#!/bin/sh
+#
+# An example hook script to prepare a packed repository for use over
+# dumb transports.
+#
+# To enable this hook, rename this file to "post-update".
+
+# exec git push github "$1"
+
+repo="github"
+
+# 判断客户端是删除分支还是推送分支
+if test -e "$1"; then
+    # 推送分支
+    git push "$repo" "$1"
+else
+    # 删除分支
+    git push --delete "$repo" "$1"
+fi
